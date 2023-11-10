@@ -20,9 +20,6 @@ class _QuestionScreenState extends State<QuestionsScreen> {
     widget.onAnswerPressed(selectedAnswer);
 
     setState(() {
-      if (currentQuestionIndex > questions.length - 1) {
-        return;
-      }
       currentQuestionIndex++;
     });
   }
