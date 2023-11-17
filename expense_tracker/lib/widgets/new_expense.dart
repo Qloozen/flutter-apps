@@ -56,6 +56,8 @@ class _NewExpenseState extends State<NewExpense> {
         amount: enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory));
+
+    Navigator.pop(context);
   }
 
   @override
@@ -67,80 +69,91 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text("Title"),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              "Add new expense",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: "\$ ",
-                    label: Text("Amount"),
+            const SizedBox(
+              height: 32,
+            ),
+            TextField(
+              controller: _titleController,
+              maxLength: 50,
+              decoration: const InputDecoration(
+                label: Text("Title"),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      prefixText: "\$ ",
+                      label: Text("Amount"),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    _selectedDate == null
-                        ? "No date selected"
-                        : dateFormatter.format(_selectedDate!),
-                  ),
-                  IconButton(
-                    onPressed: _showDatePicker,
-                    icon: const Icon(Icons.calendar_month),
-                  )
-                ],
-              ))
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                items: Category.values
-                    .map(
-                      (c) => DropdownMenuItem(
-                        value: c,
-                        child: Text(c.name.toLowerCase()),
-                      ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      _selectedDate == null
+                          ? "No date selected"
+                          : dateFormatter.format(_selectedDate!),
+                    ),
+                    IconButton(
+                      onPressed: _showDatePicker,
+                      icon: const Icon(Icons.calendar_month),
                     )
-                    .toList(),
-                onChanged: (value) {
-                  if (value == null) return;
-                  setState(() => _selectedCategory = value);
-                },
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: _submitExpense,
-                child: const Text('Save Expense'),
-              ),
-            ],
-          )
-        ],
+                  ],
+                ))
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                DropdownButton(
+                  value: _selectedCategory,
+                  items: Category.values
+                      .map(
+                        (c) => DropdownMenuItem(
+                          value: c,
+                          child: Text(c.name.toLowerCase()),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() => _selectedCategory = value);
+                  },
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cancel'),
+                ),
+                ElevatedButton(
+                  onPressed: _submitExpense,
+                  child: const Text('Save Expense'),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
