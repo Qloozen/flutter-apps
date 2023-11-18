@@ -4,7 +4,7 @@
 
 **Quiz app** (Flutter basics 2) - done
 
-**Expense tracker** (Theming, more widgets & responsiveness) - in progress
+**Expense tracker** (Theming, more widgets & responsiveness) - done
 
 **Meals app** (Multi-screen app with Riverpod and animations) - todo
 
