@@ -3,10 +3,10 @@ import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen(this.meals, this.title, {super.key});
+  const MealsScreen(this.meals, {super.key, this.title});
 
   final List<Meal> meals;
-  final String title;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,13 @@ class MealsScreen extends StatelessWidget {
       );
     }
 
+    if (title == null) {
+      return content;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );
