@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
-import 'package:meals/screens/meal_details.dart';
 import 'package:meals/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem(this.meal, {super.key});
+  const MealItem(this.meal, this.selectMeal, {super.key});
+  final void Function(BuildContext context, Meal meal) selectMeal;
 
   final Meal meal;
 
@@ -28,8 +28,7 @@ class MealItem extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (ctx) => MealDetailsScreen(meal)));
+          selectMeal(context, meal);
         },
         child: Stack(
           children: [
